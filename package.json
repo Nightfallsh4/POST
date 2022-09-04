@@ -17,5 +17,11 @@
     "prettier-plugin-solidity": "^1.0.0-beta.24",
     "solhint": "^3.3.7",
     "solidity-coverage": "^0.7.21"
-  }
+  },
+  "name": "POST",
+  "version": "0.0.1",
+  "description": "A Dapp to make souldbound tokens",
+  "main": "index.js",
+  "author": "Shanmugadevan <shanmugadevan@protonmail.com>",
+  "license": "MIT"
 }

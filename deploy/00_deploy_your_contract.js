@@ -8,7 +8,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   await deploy("Soulbound", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: [ "Hello", "world", "0.0.1"],
+    args: [ "Hello", "world", "0.0.1", "nightfallsh4.medium.com"],
     log: true,
   });
 
