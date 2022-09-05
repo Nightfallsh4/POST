@@ -3,11 +3,14 @@ pragma solidity 0.8.16;
 
 import "erc4973/src/ERC4973.sol";
 
+
 // import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 
 contract Soulbound is ERC4973 {
 	string public uri;
-	uint public tokenId = 1;
+	uint256 public tokenId = 1;
+
 	constructor(
 		string memory _name,
 		string memory _symbol,
@@ -18,7 +21,10 @@ contract Soulbound is ERC4973 {
 	}
 
 	function mint() external {
-		_mint(address(0),msg.sender,tokenId,uri);
-		tokenId+= 1;
+		_mint(address(0), msg.sender, tokenId, uri);
+		tokenId += 1;
 	}
+
+
+	
 }
