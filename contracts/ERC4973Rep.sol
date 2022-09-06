@@ -11,6 +11,8 @@ contract ERC4973Rep is ERC4973 {
 		bool exists;
 	}
 
+    // State Variables
+
 	string public uri;
 	uint256 public tokenId = 1;
 	address public issuer;
@@ -21,6 +23,7 @@ contract ERC4973Rep is ERC4973 {
 
 	mapping(address => Approved) private approvedList;
 
+	// Events
 	event ReputationChange(
 		address indexed userAddress,
 		uint256 indexed newReputation
@@ -29,6 +32,7 @@ contract ERC4973Rep is ERC4973 {
 	event ApprovalGranted(address indexed approvedAddress);
 	event Revoked(address indexed revokedAddress);
 
+	// Modifiers
 	modifier isIssuerOrApproved() {
 		require(
 			(approvedList[msg.sender].exists &&
@@ -39,6 +43,7 @@ contract ERC4973Rep is ERC4973 {
 		_;
 	}
 
+	// Contructor Function
 	constructor(
 		string memory _name,
 		string memory _symbol,
@@ -53,6 +58,7 @@ contract ERC4973Rep is ERC4973 {
 		reduceIncrement = _reduceIncrement;
 	}
 
+	// External Functions
 	function mint() external {
 		_mint(address(0), msg.sender, tokenId, uri);
 		tokenId += 1;

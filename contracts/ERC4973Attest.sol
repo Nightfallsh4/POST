@@ -12,8 +12,8 @@ contract ERC4973Attest is ERC4973 {
     // State Variables
     string public uri;
 	uint256 public tokenId = 1;
-    mapping(address => mapping(uint => address)) tokenToAttester;
-    mapping(address => mapping(uint => address[])) tokenToAttestation;
+    mapping(address => mapping(uint => address)) private tokenToAttester;
+    mapping(address => mapping(uint => address[])) private tokenToAttestation;
 
     // Modifiers
     modifier isOwner(uint _tokenId) {
@@ -66,6 +66,16 @@ contract ERC4973Attest is ERC4973 {
     function deleteRequest(uint _tokenId) external isOwner(_tokenId) {
         delete tokenToAttester[msg.sender][_tokenId];
         emit RequestDeleted(msg.sender, _tokenId);
+    }
+
+    // Getter Functions
+
+    function getTokenToAttester(address userAddress, uint _tokenId) public view returns (address) {
+        return tokenToAttester[userAddress][_tokenId];
+    }
+
+    function getTokenToAttestation(address userAddress, uint _tokenId) public view returns (address[] memory) {
+        return tokenToAttestation[userAddress][_tokenId];
     }
 
 }
