@@ -8,32 +8,30 @@ error NotAuthorised();
 contract ERC4973Rep is ERC4973 {
 	struct Approved {
 		uint256 expiryBlock;
-		bool exits;
+		bool exists;
 	}
 
 	string public uri;
 	uint256 public tokenId = 1;
 	address public issuer;
-	mapping(address => mapping(uint256 => uint256)) public reputation;
+	mapping(address => mapping(uint256 => uint256)) private reputation;
 
 	uint256 public addIncrement;
 	uint256 public reduceIncrement;
 
-	
-	mapping(address => Approved) public approvedList;
+	mapping(address => Approved) private approvedList;
 
 	event ReputationChange(
 		address indexed userAddress,
-		uint indexed newReputation
+		uint256 indexed newReputation
 	);
 
-	event Revoked(
-		address indexed revokedAddress
-	);
+	event ApprovalGranted(address indexed approvedAddress);
+	event Revoked(address indexed revokedAddress);
 
 	modifier isIssuerOrApproved() {
 		require(
-			(approvedList[msg.sender].exits &&
+			(approvedList[msg.sender].exists &&
 				approvedList[msg.sender].expiryBlock >= block.number) ||
 				msg.sender == issuer,
 			"Not Authorised or Expired"
@@ -62,33 +60,52 @@ contract ERC4973Rep is ERC4973 {
 
 	function increaseReputation(address userAddress, uint256 _tokenId)
 		external
-		isIssuerOrApproved()
+		isIssuerOrApproved
 	{
-		require(ownerOf(_tokenId)== userAddress, "Address doesn't have SBT");
+		require(ownerOf(_tokenId) == userAddress, "Address doesn't have SBT");
 		reputation[userAddress][_tokenId] += addIncrement;
-		emit ReputationChange(userAddress,reputation[userAddress][_tokenId]);
+		emit ReputationChange(userAddress, reputation[userAddress][_tokenId]);
 	}
 
 	function decreaseReputation(address userAddress, uint256 _tokenId)
 		external
-		isIssuerOrApproved()
+		isIssuerOrApproved
 	{
-		require(ownerOf(_tokenId)== userAddress, "Address doesn't have SBT");
-		reputation[userAddress][_tokenId] -= reduceIncrement;
-		emit ReputationChange(userAddress,reputation[userAddress][_tokenId]);
+		require(ownerOf(_tokenId) == userAddress, "Address doesn't have SBT");
+		if (reputation[userAddress][_tokenId] >= reduceIncrement) {
+			reputation[userAddress][_tokenId] -= reduceIncrement;
+		}else {
+			reputation[userAddress][_tokenId] = 0;
+		}
+		emit ReputationChange(userAddress, reputation[userAddress][_tokenId]);
 	}
 
-	function approve(
-		address addressToApprove,
-		uint256 expiryBlock
-	) external {
+	function approve(address addressToApprove, uint256 expiryBlock) external {
 		require(msg.sender == issuer, "Only issuer can Approve Addresses");
-		approvedList[addressToApprove] = Approved(expiryBlock,true);
+		approvedList[addressToApprove] = Approved(expiryBlock, true);
+		emit ApprovalGranted(addressToApprove);
 	}
 
 	function revoke(address addressToRevoke) external {
-		require(msg.sender == issuer, "Only issuer can Approve Addresses");
+		require(msg.sender == issuer, "Only issuer can Revoke Addresses");
 		delete approvedList[addressToRevoke];
 		emit Revoked(addressToRevoke);
+	}
+
+	// Getter Functions
+	function getReputation(address userAddress, uint256 _tokenId)
+		public
+		view
+		returns (uint256)
+	{
+		return reputation[userAddress][_tokenId];
+	}
+
+	function getApprovedList(address userAddress)
+		public
+		view
+		returns (Approved memory)
+	{
+		return approvedList[userAddress];
 	}
 }
