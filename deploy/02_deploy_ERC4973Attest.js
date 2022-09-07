@@ -1,52 +1,30 @@
 // deploy/00_deploy_your_contract.js
 
 //const { ethers } = require("hardhat");
+const { MerkleTree } = require("merkletreejs")
+const keccak256 = require("keccak256")
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
-    const { deploy } = deployments;
-    const { deployer } = await getNamedAccounts();
-    await deploy("ERC4973Attest", {
-      // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-      from: deployer,
-      args: ["ERC4973Attest", "ATTEST", "1", "nightfallsh4.medium.com"],
-      log: true,
-    });
-  
-    /*
-      // Getting a previously deployed contract
-      const YourContract = await ethers.getContract("YourContract", deployer);
-      await YourContract.setPurpose("Hello");
-    
-      To take ownership of yourContract using the ownable library uncomment next line and add the 
-      address you want to be the owner. 
-      // yourContract.transferOwnership(YOUR_ADDRESS_HERE);
-  
-      //const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
-    */
-  
-    /*
-    //If you want to send value to an address from the deployer
-    const deployerWallet = ethers.provider.getSigner()
-    await deployerWallet.sendTransaction({
-      to: "0x34aA3F359A9D614239015126635CE7732c18fDF3",
-      value: ethers.utils.parseEther("0.001")
-    })
-    */
-  
-    /*
-    //If you want to send some ETH to a contract on deploy (make your constructor payable!)
-    const yourContract = await deploy("YourContract", [], {
-    value: ethers.utils.parseEther("0.05")
-    });
-    */
-  
-    /*
-    //If you want to link a library into your contract:
-    // reference: https://github.com/austintgriffith/scaffold-eth/blob/using-libraries-example/packages/hardhat/scripts/deploy.js#L19
-    const yourContract = await deploy("YourContract", [], {}, {
-     LibraryName: **LibraryAddress**
-    });
-    */
-  };
-  module.exports.tags = ["ERC4973Attest", "all"];
-  
+  const { deploy } = deployments
+	const { deployer, player } = await getNamedAccounts()
+	const leaves = [deployer, player].map(x => keccak256(x))
+	const tree = new MerkleTree(leaves, keccak256, {sortPairs:true})
+  const root = tree.getHexRoot()
+  const leaf = keccak256(player)
+
+
+	await deploy("ERC4973Attest", {
+		from: deployer,
+		args: [
+			"ERC4973Attest",
+			"ATTEST",
+			"1",
+			"bafybeifuhw26cjjqimxaayh4vii2dwwfmcxvexlxqawy3mtxhjtfevkf7i",
+			root,
+			3,
+			0,
+		],
+		log: true,
+	})
+}
+module.exports.tags = ["ERC4973Attest", "all"]

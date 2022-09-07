@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
-import "erc4973/src/ERC4973.sol";
+import "./Soulbound.sol";
 
 error NotAuthorised();
 
-contract ERC4973Rep is ERC4973 {
+contract ERC4973Rep is Soulbound {
 	struct Approved {
 		uint256 expiryBlock;
 		bool exists;
@@ -13,8 +13,6 @@ contract ERC4973Rep is ERC4973 {
 
     // State Variables
 
-	string public uri;
-	uint256 public tokenId = 1;
 	address public issuer;
 	mapping(address => mapping(uint256 => uint256)) private reputation;
 
@@ -49,20 +47,22 @@ contract ERC4973Rep is ERC4973 {
 		string memory _symbol,
 		string memory version,
 		string memory _uri,
+		bytes32 _root,
+		uint256 _mintLimit,
+		uint256 initialTokenId,
 		uint256 _addIncrement,
 		uint256 _reduceIncrement
-	) ERC4973(_name, _symbol, version) {
+	) Soulbound(_name, _symbol, version, _uri, _root, _mintLimit, initialTokenId) {
 		issuer = msg.sender;
-		uri = _uri;
 		addIncrement = _addIncrement;
 		reduceIncrement = _reduceIncrement;
 	}
 
 	// External Functions
-	function mint() external {
-		_mint(address(0), msg.sender, tokenId, uri);
-		tokenId += 1;
-	}
+	// function mint() external {
+	// 	_mint(address(0), msg.sender, tokenId, uri);
+	// 	tokenId += 1;
+	// }
 
 	function increaseReputation(address userAddress, uint256 _tokenId)
 		external

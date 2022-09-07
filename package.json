@@ -24,5 +24,9 @@
   "description": "A Dapp to make souldbound tokens",
   "main": "index.js",
   "author": "Shanmugadevan <shanmugadevan@protonmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.32"
+  }
 }
