@@ -9,14 +9,17 @@ const keccak256 = require("keccak256")
 !developmentChains.includes(network.name)
 	? describe.skip
 	: describe("Souldbound token Unit test", function () {
-			let soulbound, deployer, player, leaves, tree
+			let soulbound, deployer, player,player2,player3, leaves, tree
 			beforeEach(async () => {
 				deployer = (await getNamedAccounts()).deployer
 				player = (await getNamedAccounts()).player
+				player2 = (await getNamedAccounts()).player2
+				player3 = (await getNamedAccounts()).player3
 				await deployments.fixture(["Soulbound"])
 				soulbound = await ethers.getContract("Soulbound", deployer)
-				leaves = [deployer, player].map(x => keccak256(x))
-				tree = new MerkleTree(leaves, keccak256, {sortPairs:true})			})
+				leaves = [deployer, player].map((x) => keccak256(x))
+				tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
+			})
 
 			describe("Check constructor fucntion", function () {
 				it("Checks if params set correctly", async () => {
@@ -43,6 +46,23 @@ const keccak256 = require("keccak256")
 			})
 
 			describe("Check mint function", function () {
+				it("Reverts if proof is invalid", async () => {
+					leaves = [player2, player3].map((x) => keccak256(x))
+					tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
+					const leaf = keccak256(player2).toString("hex")
+					const proof = tree.getHexProof(leaf)
+					await expect(soulbound.mint(proof)).to.be.revertedWith("Not Valid proof for Address")
+				})
+
+				it("Reverts if Token Limit Reached", async () => {
+					const leaf = keccak256(deployer).toString("hex")
+					const proof = tree.getHexProof(leaf)
+					await soulbound.mint(proof)
+					await soulbound.mint(proof)
+					await soulbound.mint(proof)
+					await expect(soulbound.mint(proof)).to.be.revertedWith("Token Limit Reached")
+				})
+
 				it("Check if minted to correct address", async () => {
 					const leaf = keccak256(deployer).toString("hex")
 					const proof = tree.getHexProof(leaf)
@@ -56,7 +76,7 @@ const keccak256 = require("keccak256")
 					const tokenId = await soulbound.tokenId()
 					const leaf = keccak256(deployer).toString("hex")
 					const proof = tree.getHexProof(leaf)
-					await soulbound.mint(proof)					
+					await soulbound.mint(proof)
 					const secondTokenId = await soulbound.tokenId()
 					assert.equal(tokenId.toNumber() + 1, secondTokenId.toNumber())
 				})
@@ -65,7 +85,7 @@ const keccak256 = require("keccak256")
 					const initialBalance = await soulbound.balanceOf(deployer)
 					const leaf = keccak256(deployer).toString("hex")
 					const proof = tree.getHexProof(leaf)
-					await soulbound.mint(proof)	
+					await soulbound.mint(proof)
 					const secondBalance = await soulbound.balanceOf(deployer)
 					assert.equal(initialBalance.toNumber() + 1, secondBalance.toNumber())
 				})
@@ -73,7 +93,7 @@ const keccak256 = require("keccak256")
 				it("Checks if tokenURI is set", async () => {
 					const leaf = keccak256(deployer).toString("hex")
 					const proof = tree.getHexProof(leaf)
-					await soulbound.mint(proof)	
+					await soulbound.mint(proof)
 					const tokenId = await soulbound.tokenId()
 					const tokenURI = await soulbound.tokenURI(tokenId)
 					assert.equal(
@@ -87,7 +107,7 @@ const keccak256 = require("keccak256")
 				it("Checks if unequips", async () => {
 					const leaf = keccak256(deployer).toString("hex")
 					const proof = tree.getHexProof(leaf)
-					await soulbound.mint(proof)	
+					await soulbound.mint(proof)
 					const tokenId = await soulbound.tokenId()
 					await soulbound.unequip(tokenId)
 					await expect(soulbound.ownerOf(tokenId)).to.be.revertedWith(

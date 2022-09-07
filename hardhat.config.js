@@ -51,5 +51,8 @@ module.exports = {
 		player2: {
 			default: 2,
 		},
+		player3: {
+			default: 3,
+		},
 	},
 }

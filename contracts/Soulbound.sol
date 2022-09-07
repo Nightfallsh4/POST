@@ -53,7 +53,7 @@ contract Soulbound is ERC4973 {
 	}
 
 
-	function isValid(bytes32[] memory proof) public view returns (bool){
+	function isValid(bytes32[] memory proof) internal view returns (bool){
 		return MerkleProof.verify(proof, root, keccak256(abi.encodePacked(msg.sender)));
 	}
 
