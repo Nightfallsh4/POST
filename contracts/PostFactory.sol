@@ -7,15 +7,19 @@ import "./Interfaces/IERC4973AttestFactory.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PostFactory is Ownable {
-	// Soulbound public soulbound;
-	// ERC4973Rep public erc4973Rep;
-	// ERC4973Attest public erc4973Attest;
+
 
 	string public creator;
 	uint256 public mintFee;
 	address public soulboundFactoryAddress;
 	address public erc4973RepFactoryAddress;
 	address public erc4973AttestFactoryAddress;
+
+	// Events
+	event DropCreated(
+		string dropType,
+		address dropAddress
+	);
 
 	constructor(string memory _creator, uint256 _mintFee) {
 		creator = _creator;
@@ -44,6 +48,7 @@ contract PostFactory is Ownable {
 			_mintLimit,
 			initialTokenId
 		);
+		emit DropCreated("Soulbound",dropAddress);
 		return dropAddress;
 	}
 
@@ -73,6 +78,7 @@ contract PostFactory is Ownable {
 			_addIncrement,
 			_reduceIncrement
 		);
+		emit DropCreated("ERC4973Rep",dropAddress);
 		return dropAddress;
 	}
 
@@ -99,7 +105,12 @@ contract PostFactory is Ownable {
 			_mintLimit,
 			initialTokenId
 		);
+		emit DropCreated("ERC4973Attest", dropAddress);
 		return dropAddress;
+	}
+
+	function setMintFee(uint _mintFee) external onlyOwner() {
+		mintFee = _mintFee;
 	}
 
     function setAddresses(address[3] memory addressList) external onlyOwner() {

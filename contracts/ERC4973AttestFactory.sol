@@ -12,7 +12,7 @@ contract ERC4973AttestFactory is Ownable {
 		proxy = _proxy;
 	}
 
-    function createdeploy(
+    function createDeploy(
 		string memory _name,
 		string memory _symbol,
 		string memory version,
