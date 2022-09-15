@@ -16,7 +16,7 @@ const UNSAFE_MAINNET_RPC_URL = process.env.UNSAFE_MAINNET_RPC_URL
 module.exports = {
 	solidity: "0.8.16",
 	// solidity: {
-	// 	compilers: [{ version: "0.8.9" }, { version: "0.4.19" }, { version: "0.6.12" }],
+		// compilers: [{ version: "0.8.9" }, { version: "0.4.19" }, { version: "0.6.12" }],
 	// },
 	gasReporter: {
 		enabled: false,

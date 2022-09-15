@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.3.2",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@rainbow-me/rainbowkit": "^0.5.1",
     "@rainbow-me/rainbowkit-siwe-next-auth": "^0.1.1",
     "ethers": "^5.7.0",
+    "framer-motion": "^6",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "18.2.0",

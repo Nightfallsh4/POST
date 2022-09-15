@@ -4,9 +4,13 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
+import { ChakraProvider } from "@chakra-ui/react"
 
 const { chains, provider } = configureChains(
-	[chain.goerli, chain.sepolia, chain.polygonMumbai, chain.optimismGoerli],
+	[
+		chain.localhost,
+		// chain.goerli, chain.sepolia, chain.polygonMumbai, chain.optimismGoerli
+	],
 	[alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
 )
 const { connectors } = getDefaultWallets({
@@ -23,9 +27,11 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<div className="m-10">
 			<WagmiConfig client={wagmiClient}>
-				<RainbowKitProvider chains={chains}>
-					<Component {...pageProps} />
-				</RainbowKitProvider>
+				<ChakraProvider>
+					<RainbowKitProvider chains={chains}>
+						<Component {...pageProps} />
+					</RainbowKitProvider>
+				</ChakraProvider>
 			</WagmiConfig>
 		</div>
 	)

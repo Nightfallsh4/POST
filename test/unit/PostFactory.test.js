@@ -215,7 +215,6 @@ const keccak256 = require("keccak256")
 			describe("withdrawFees function tests", () => {
 				it("check if funds withdrawn correctly", async () => {
 					const mintFee = ethers.utils.parseEther("0.001")
-					// const provider = await ethers.provider.getBalance(deployer)
 					const deployerBalance = await ethers.provider.getBalance(deployer)
 					const deployAddress = await playerPostFactory.createSoulboundToken(
 						name,
