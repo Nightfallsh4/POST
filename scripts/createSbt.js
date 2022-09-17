@@ -1,19 +1,19 @@
-const ethers = require("ethers")
+const {ethers, getNamedAccounts, deployments} = require("hardhat")
 const { parseEther } = require("ethers/lib/utils")
-const addressAbi = require("../nextjs-app/deployedAddress/address.json")
+const addressAbi = require("../deployments/goerli/PostFactory.json")
+require("dotenv")
 
 async function main() {
-	let httpProvider = new ethers.providers.JsonRpcProvider()
-	const contractAddress = "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9"
+	const { deploy } = deployments
+	const { deployer, player } = await getNamedAccounts()
 
-	const postFactory = new ethers.Contract(contractAddress, addressAbi.postFactory.abi)
-	const privateKey =
-		"0x8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61"
-	const wallet = new ethers.Wallet(privateKey, httpProvider)
 
-	const contractWithSigner = postFactory.connect(wallet)
+	const contractAddress = "0x3e646aCfDaa901239A72f86a79bf1aE93B2596ee"
 
-	const tx = await contractWithSigner.createSoulboundToken(
+	const postFactory = await ethers.getContractAt("PostFactory", contractAddress)
+
+
+	const tx = await postFactory.createSoulboundToken(
 		"Test1",
 		"T1",
         "1",
