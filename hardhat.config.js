@@ -14,6 +14,8 @@ const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
 const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY
 const UNSAFE_MAINNET_RPC_URL = process.env.UNSAFE_MAINNET_RPC_URL
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+
 module.exports = {
 	solidity: "0.8.16",
 	// solidity: {
@@ -21,6 +23,9 @@ module.exports = {
 	// },
 	gasReporter: {
 		enabled: false,
+	},
+	etherscan:{
+		apiKey: ETHERSCAN_API_KEY
 	},
 	defaultNetwork: "hardhat",
 	networks: {
@@ -39,7 +44,7 @@ module.exports = {
 		},
 		goerli:{
 			chainId: 5,
-			blockConfirmations:2,
+			blockConfirmations:3,
 			url: GOERLI_RPC_URL,
 			accounts: [ACCOUNT_PRIVATE_KEY]
 		},
