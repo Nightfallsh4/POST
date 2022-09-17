@@ -41,7 +41,7 @@ export default function IssueSbt() {
 	const { config } = usePrepareContractWrite({
 		addressOrName: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
 		// contractInterface: addressJson.abi,
-		contractInterface: addressJson.abi,
+		contractInterface: addressJson.postFactory.abi,
 		functionName: "createSoulboundToken",
 		args: [name, symbol, "1", uri, root, mintLimit, 0],
 		overrides: { value: parseEther("1") },

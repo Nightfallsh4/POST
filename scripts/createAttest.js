@@ -6,7 +6,7 @@ async function main() {
 	let httpProvider = new ethers.providers.JsonRpcProvider()
 	const contractAddress = "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9"
 
-	const postFactory = new ethers.Contract(contractAddress, addressAbi.abi)
+	const postFactory = new ethers.Contract(contractAddress, addressAbi.postFactory.abi)
 	const privateKey =
 		"0x8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61"
 	const wallet = new ethers.Wallet(privateKey, httpProvider)

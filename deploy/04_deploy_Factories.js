@@ -5,7 +5,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 	const { deployer, player } = await getNamedAccounts()
 
 	const mintFee = ethers.utils.parseEther("0.001")
-	const {address} = await deploy("PostFactory", {
+	const {address, receipt} = await deploy("PostFactory", {
 		from: deployer,
 		args: ["nightfallsh4", mintFee],
 		log: true,
@@ -27,5 +27,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 		log: true,
 	})
 	await postFactory.setAddresses([soulboundFactoryaddress, erc4973RepFactoryaddress, erc4973AttestFactoryaddress])
+	console.log("Post Factory Address:- " + address)
+	console.log(receipt)
 }
 module.exports.tags = ["Factories", "all"]

@@ -12,7 +12,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 	const root = tree.getHexRoot()
 	const leaf = keccak256(player)
 
-	await deploy("Soulbound", {
+	const soulbound = await deploy("Soulbound", {
 		from: deployer,
 		args: [
 			"Soulbound",
@@ -25,5 +25,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 		],
 		log: true,
 	})
+	console.log(soulbound.receipt);
 }
 module.exports.tags = ["Soulbound", "all"]

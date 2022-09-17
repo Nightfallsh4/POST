@@ -13,6 +13,7 @@ require("dotenv").config()
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
 const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY
 const UNSAFE_MAINNET_RPC_URL = process.env.UNSAFE_MAINNET_RPC_URL
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL
 module.exports = {
 	solidity: "0.8.16",
 	// solidity: {
@@ -35,6 +36,12 @@ module.exports = {
 			blockConfirmations: 2,
 			url: RINKEBY_RPC_URL,
 			accounts: [ACCOUNT_PRIVATE_KEY],
+		},
+		goerli:{
+			chainId: 5,
+			blockConfirmations:2,
+			url: GOERLI_RPC_URL,
+			accounts: [ACCOUNT_PRIVATE_KEY]
 		},
 		localhost: {
 			chainId:31337,
