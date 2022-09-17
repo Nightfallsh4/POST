@@ -1,12 +1,16 @@
-const {ethers, getNamedAccounts, deployments} = require("hardhat")
+const {ethers} = require("hardhat")
 const { parseEther } = require("ethers/lib/utils")
 const addressAbi = require("../deployments/goerli/PostFactory.json")
+const allowList = require("../nextjs-app/deployedAddress/allowList.json")
+
 require("dotenv")
 
 async function main() {
-	const { deploy } = deployments
-	const { deployer, player } = await getNamedAccounts()
 
+
+	const leaves = allowList.allowed.map((x) => keccak256(x))
+	const tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
+	const root = tree.getHexRoot()
 
 	const contractAddress = "0x3e646aCfDaa901239A72f86a79bf1aE93B2596ee"
 
@@ -18,12 +22,12 @@ async function main() {
 		"T1",
         "1",
 		"nightfallsh4.medium.com",
-		"0x070e8db97b197cc0e4a1790c5e6c3667bab32d733db7f815fbe84f5824c7168d",
+		root,
 		3,
 		0,
         5,
         25,
-		{ value: parseEther("0.1") },
+		{ value: parseEther("0.00001") },
 	)
 
     const txReceipt = await tx.wait(1)

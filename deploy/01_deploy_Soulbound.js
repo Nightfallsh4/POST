@@ -25,6 +25,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 		],
 		log: true,
 	})
-	console.log(soulbound.receipt);
+	// console.log(soulbound.receipt);
 }
 module.exports.tags = ["Soulbound", "all"]

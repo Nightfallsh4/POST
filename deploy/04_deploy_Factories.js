@@ -27,7 +27,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 		log: true,
 	})
 	await postFactory.setAddresses([soulboundFactoryaddress, erc4973RepFactoryaddress, erc4973AttestFactoryaddress])
-	console.log("Post Factory Address:- " + address)
-	console.log(receipt)
+	// console.log("Post Factory Address:- " + address)
+	// console.log(receipt)
 }
 module.exports.tags = ["Factories", "all"]
