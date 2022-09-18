@@ -2,10 +2,11 @@ const {ethers} = require("hardhat")
 const { parseEther } = require("ethers/lib/utils")
 const addressAbi = require("../deployments/goerli/PostFactory.json")
 const allowList = require("../nextjs-app/deployedAddress/allowList.json")
+const keccak256 = require("keccak256")
+const { default: MerkleTree } = require("merkletreejs")
 require("dotenv")
 
 async function main() {
-
 
 	const leaves = allowList.allowed.map((x) => keccak256(x))
 	const tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
@@ -17,14 +18,14 @@ async function main() {
 
 
 	const tx = await postFactory.createSoulboundToken(
-		"Test1",
-		"T1",
+		"Test2",
+		"T2",
         "1",
 		"nightfallsh4.medium.com",
 		root,
 		3,
 		0,
-		{ value: parseEther("0.00001") },
+		{ value: parseEther("0.001") },
 	)
 
     const txReceipt = await tx.wait(1)
