@@ -1,5 +1,5 @@
 import { DropCreated as DropCreatedEvent } from "../generated/Token/Token"
-import { Transfer as TransferEvent } from "../generated/templates/Soulbound/Soulbound"
+import { Transfer as TransferEvent, Soulbound as SoulboundContract } from "../generated/templates/Soulbound/Soulbound"
 import { Collection, Token, User } from "../generated/schema"
 import {
 	Soulbound as SoulboundDataSource,
@@ -13,6 +13,9 @@ export function handleDropCreated(event: DropCreatedEvent): void {
 	entity.type = event.params.dropType
 	entity.address = event.params.dropAddress
 	entity.issuer = event.transaction.from
+	let contract = SoulboundContract.bind(event.params.dropAddress)
+	entity.name = contract.name()
+	entity.uri = contract.uri()
 	entity.save()
 	SoulboundDataSource.create(event.params.dropAddress)
 }

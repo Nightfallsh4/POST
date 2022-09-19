@@ -3,6 +3,8 @@ type Collection @entity {
 	address: Bytes!
 	type: String!
   	issuer: Bytes!
+	name: String!
+	uri: String!
 	tokens: [Token!]! @derivedFrom(field: "collection")
 }
 
