@@ -14,11 +14,8 @@ export function handleDropCreated(event: DropCreatedEvent): void {
 	entity.address = event.params.dropAddress
 	entity.issuer = event.transaction.from
 	entity.save()
-	// if (event.params.dropType.toString()=== "Soulbound") {
 	SoulboundDataSource.create(event.params.dropAddress)
-	// } else if (event.params.dropType.toString() === "ERC4973Rep") {
-	// ERC4973RepDataSource.create(event.params.dropAddress)
-	// }
+
 }
 
 export function handleTransfer(event: TransferEvent): void {

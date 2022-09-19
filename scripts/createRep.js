@@ -2,7 +2,8 @@ const {ethers} = require("hardhat")
 const { parseEther } = require("ethers/lib/utils")
 const addressAbi = require("../deployments/goerli/PostFactory.json")
 const allowList = require("../nextjs-app/deployedAddress/allowList.json")
-
+const keccak256 = require("keccak256")
+const { default: MerkleTree } = require("merkletreejs")
 require("dotenv")
 
 async function main() {
@@ -27,7 +28,7 @@ async function main() {
 		0,
         5,
         25,
-		{ value: parseEther("0.00001") },
+		{ value: parseEther("0.001") },
 	)
 
     const txReceipt = await tx.wait(1)
