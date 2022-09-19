@@ -36,6 +36,7 @@ templates:
       entities:
         - Collection
         - Token
+        - User
       abis:
         - name: Soulbound
           file: Soulbound/abis/Soulbound.json

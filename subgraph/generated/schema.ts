@@ -59,6 +59,15 @@ export class Collection extends Entity {
   set type(value: string) {
     this.set("type", Value.fromString(value));
   }
+
+  get issuer(): Bytes {
+    let value = this.get("issuer");
+    return value!.toBytes();
+  }
+
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
+  }
 }
 
 export class Token extends Entity {
@@ -101,15 +110,6 @@ export class Token extends Entity {
     this.set("address", Value.fromBytes(value));
   }
 
-  get owner(): string {
-    let value = this.get("owner");
-    return value!.toString();
-  }
-
-  set owner(value: string) {
-    this.set("owner", Value.fromString(value));
-  }
-
   get tokenId(): BigInt {
     let value = this.get("tokenId");
     return value!.toBigInt();
@@ -117,6 +117,15 @@ export class Token extends Entity {
 
   set tokenId(value: BigInt) {
     this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get owner(): string {
+    let value = this.get("owner");
+    return value!.toString();
+  }
+
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
   }
 }
 

@@ -1,7 +1,10 @@
 import { DropCreated as DropCreatedEvent } from "../generated/Token/Token"
 import { Transfer as TransferEvent } from "../generated/templates/Soulbound/Soulbound"
 import { Collection, Token, User } from "../generated/schema"
-import { Soulbound as SoulboundContract } from "../generated/templates"
+import {
+	Soulbound as SoulboundDataSource,
+	// ERC4973Rep as ERC4973RepDataSource,
+} from "../generated/templates"
 
 export function handleDropCreated(event: DropCreatedEvent): void {
 	let entity = new Collection(
@@ -9,20 +12,25 @@ export function handleDropCreated(event: DropCreatedEvent): void {
 	)
 	entity.type = event.params.dropType
 	entity.address = event.params.dropAddress
+	entity.issuer = event.transaction.from
 	entity.save()
-	SoulboundContract.create(event.params.dropAddress)
+	// if (event.params.dropType.toString()=== "Soulbound") {
+	SoulboundDataSource.create(event.params.dropAddress)
+	// } else if (event.params.dropType.toString() === "ERC4973Rep") {
+	// ERC4973RepDataSource.create(event.params.dropAddress)
+	// }
 }
 
 export function handleTransfer(event: TransferEvent): void {
-	let entity = new Token(event.params.tokenId.toString())
+	let entity = new Token(event.transaction.hash.toHex()+ "-" +event.params.tokenId.toString())
 	entity.address = event.address
 	entity.tokenId = event.params.tokenId
-	entity.owner = event.params.to.toString()
+	entity.owner = event.params.to.toHexString()
 	entity.save()
 
-	let user = User.load(event.params.to.toString())
+	let user = User.load(event.params.to.toHexString())
 	if (!user) {
-		user = new User(event.params.to.toString())
-		user.save() //j
+		user = new User(event.params.to.toHexString())
+		user.save()
 	}
 }

@@ -2,13 +2,14 @@ type Collection @entity {
 	id: ID!
 	address: Bytes!
 	type: String!
+  	issuer: Bytes!
 }
 
 type Token @entity {
 	id: ID!
 	address: Bytes!
-	owner: User!
 	tokenId: BigInt!
+	owner: User!
 }
 
 type User @entity {

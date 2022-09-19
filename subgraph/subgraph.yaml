@@ -36,6 +36,7 @@ templates:
       entities:
         - Collection
         - Token
+        - User
       abis:
         - name: Soulbound
           file: ./abis/Soulbound.json
@@ -43,3 +44,29 @@ templates:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/token.ts
+  # - kind: ethereum
+  #   name: ERC4973Rep
+  #   network: goerli
+  #   source:
+  #     abi: ERC4973Rep
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.6
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Collection
+  #       - Token
+  #       - User
+  #     abis:
+  #       - name: ERC4973Rep
+  #         file: ./abis/ERC4973Rep.json
+  #     eventHandlers:
+  #       - event: Transfer(indexed address,indexed address,indexed uint256)
+  #         handler: handleTransfer
+  #       - event: ApprovalGranted(indexed address)
+  #         handler: handleApprovalGranted
+  #       - event: ReputationChange(indexed address,indexed uint256)
+  #         handler: handleReputationChange
+  #       - event: Revoked(indexed address)
+  #         handler: handleRevoked
+  #     file: ./src/token.ts
