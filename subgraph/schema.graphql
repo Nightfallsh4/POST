@@ -3,6 +3,7 @@ type Collection @entity {
 	address: Bytes!
 	type: String!
   	issuer: Bytes!
+	tokens: [Token!]! @derivedFrom(field: "collection")
 }
 
 type Token @entity {
@@ -10,6 +11,7 @@ type Token @entity {
 	address: Bytes!
 	tokenId: BigInt!
 	owner: User!
+	collection: Collection!
 }
 
 type User @entity {

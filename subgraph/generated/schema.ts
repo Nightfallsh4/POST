@@ -68,6 +68,15 @@ export class Collection extends Entity {
   set issuer(value: Bytes) {
     this.set("issuer", Value.fromBytes(value));
   }
+
+  get tokens(): Array<string> {
+    let value = this.get("tokens");
+    return value!.toStringArray();
+  }
+
+  set tokens(value: Array<string>) {
+    this.set("tokens", Value.fromStringArray(value));
+  }
 }
 
 export class Token extends Entity {
@@ -126,6 +135,15 @@ export class Token extends Entity {
 
   set owner(value: string) {
     this.set("owner", Value.fromString(value));
+  }
+
+  get collection(): string {
+    let value = this.get("collection");
+    return value!.toString();
+  }
+
+  set collection(value: string) {
+    this.set("collection", Value.fromString(value));
   }
 }
 

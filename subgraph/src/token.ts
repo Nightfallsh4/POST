@@ -8,14 +8,13 @@ import {
 
 export function handleDropCreated(event: DropCreatedEvent): void {
 	let entity = new Collection(
-		event.transaction.hash.toHex() + "-" + event.logIndex.toString(),
+		event.params.dropAddress.toHexString(),
 	)
 	entity.type = event.params.dropType
 	entity.address = event.params.dropAddress
 	entity.issuer = event.transaction.from
 	entity.save()
 	SoulboundDataSource.create(event.params.dropAddress)
-
 }
 
 export function handleTransfer(event: TransferEvent): void {
@@ -23,6 +22,7 @@ export function handleTransfer(event: TransferEvent): void {
 	entity.address = event.address
 	entity.tokenId = event.params.tokenId
 	entity.owner = event.params.to.toHexString()
+	entity.collection = event.address.toHexString()
 	entity.save()
 
 	let user = User.load(event.params.to.toHexString())
