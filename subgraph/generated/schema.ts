@@ -87,6 +87,15 @@ export class Collection extends Entity {
     this.set("uri", Value.fromString(value));
   }
 
+  get root(): string {
+    let value = this.get("root");
+    return value!.toString();
+  }
+
+  set root(value: string) {
+    this.set("root", Value.fromString(value));
+  }
+
   get createdAt(): BigInt {
     let value = this.get("createdAt");
     return value!.toBigInt();

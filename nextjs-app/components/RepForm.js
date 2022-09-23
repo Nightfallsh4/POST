@@ -4,60 +4,54 @@ import {
 	Center,
 	FormControl,
 	FormLabel,
+	Image,
 	Input,
 } from "@chakra-ui/react"
 import { useState } from "react"
-import Header from "./Header"
-import addressJson from "../deployedAddress/address.json"
 import keccak256 from "keccak256"
 import MerkleTree from "merkletreejs"
-import {
-	useContractWrite,
-	usePrepareContractWrite,
-	useWaitForTransaction,
-} from "wagmi"
-import { parseEther } from "ethers/lib/utils"
+import { AddIcon } from "@chakra-ui/icons"
+
+import IssueButton from "./issueButton"
+import IssueRepButton from "./IssueRepButton"
 
 export default function RepForm(props) {
 	const [name, setName] = useState("")
 	const [symbol, setSymbol] = useState("")
-	const [uri, setUri] = useState("")
 	const [mintLimit, setMintLimit] = useState()
 	const [allowList, setAllowList] = useState("")
 	const [root, setRoot] = useState("")
-    const [addIncrement, setAddIncrement] = useState()
-    const [reduceIncrement, setReduceIncrement] = useState()
+	const [selectedFile, setSelectedFile] = useState()
+	const [leaves, setLeaves] = useState()
+	const [preImage, setPreImage] = useState()
+	const [addIncrement, setAddIncrement] = useState()
+	const [reduceIncrement, setReduceIncrement] = useState()
 
 	const changeName = (event) => setName(event.target.value)
 	const changeSymbol = (event) => setSymbol(event.target.value)
-	const changeUri = (event) => setUri(event.target.value)
+	const changeAddIncrement = (event) => setAddIncrement(event.target.value)
+	const changeReduceIncrement = (event) =>
+		setReduceIncrement(event.target.value)
 	const changeMintLimit = (event) => setMintLimit(event.target.value)
-    const changeAddIncrement = (event) => setAddIncrement(event.target.value)
-    const changeReduceIncrement = (event) => setReduceIncrement(event.target.value)
 	function changeAllowList(event) {
 		const value = event.target.value
 		const list = value.split(",")
 		setAllowList(list)
 	}
-	const { config } = usePrepareContractWrite({
-		addressOrName: "0x3e646aCfDaa901239A72f86a79bf1aE93B2596ee",
-		contractInterface: addressJson.postFactory.abi,
-		functionName: "createSoulboundReputationToken",
-		args: [name, symbol, "1", uri, root, mintLimit, 0, addIncrement, reduceIncrement],
-		overrides: { value: parseEther("0.001") },
-	})
-	const { data, isLoading, isSuccess, write } = useContractWrite(config)
 
-	const waitTransaction = useWaitForTransaction(data?.hash)
 	function makeRoot() {
-		const leaves = allowList.map((x) => keccak256(x))
-		const tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
+		const _leaves = allowList.map((x) => keccak256(x))
+		const tree = new MerkleTree(_leaves, keccak256, { sortPairs: true })
 		const _root = tree.getHexRoot()
 		setRoot(_root)
+		setLeaves(_leaves)
 		console.log(_root)
 	}
-	async function issueToken() {
-		await write?.()
+
+	function preview(event) {
+		setSelectedFile(event.target.files[0])
+		setPreImage(URL.createObjectURL(event.target.files[0]))
+		console.log(selectedFile)
 	}
 
 	return (
@@ -79,7 +73,7 @@ export default function RepForm(props) {
 									value={name}
 									onChange={changeName}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
+									_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 									_hover={{ bg: "#f7efe8" }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
@@ -94,22 +88,8 @@ export default function RepForm(props) {
 									value={symbol}
 									onChange={changeSymbol}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
+									_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 									_hover={{ bg: "#f7efe8" }}
-									focusBorderColor="#d08290"
-									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
-								/>
-							</div>
-							<div className="my-5">
-								<FormLabel>URI</FormLabel>
-								<Input
-									variant="filled"
-									placeholder="URI"
-									size="lg"
-									value={uri}
-									onChange={changeUri}
-									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
@@ -123,35 +103,35 @@ export default function RepForm(props) {
 									value={mintLimit}
 									onChange={changeMintLimit}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
+									_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
 							</div>
-                            <div className="my-5">
+							<div className="my-5">
 								<FormLabel>Add Increment</FormLabel>
 								<Input
 									variant="filled"
-									placeholder="Mint Limit"
+									placeholder="Add Increment"
 									size="lg"
 									value={addIncrement}
 									onChange={changeAddIncrement}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
+									_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
 							</div>
-                            <div className="my-5">
+							<div className="my-5">
 								<FormLabel>Reduce Increment</FormLabel>
 								<Input
 									variant="filled"
-									placeholder="Mint Limit"
+									placeholder="Reduce Increment"
 									size="lg"
 									value={reduceIncrement}
 									onChange={changeReduceIncrement}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
+									_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
@@ -166,7 +146,7 @@ export default function RepForm(props) {
 										value={allowList}
 										onChange={changeAllowList}
 										bgColor="rgba(208, 130, 144,0.77)"
-										_placeholder={{ color: "#f7efe8", opacity:0.5}}
+										_placeholder={{ color: "#f7efe8", opacity: 0.5 }}
 										focusBorderColor="#d08290"
 										className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 									/>
@@ -183,21 +163,48 @@ export default function RepForm(props) {
 								</div>
 							</div>
 							<Center>
-								<Button
-									disabled={!root}
-									onClick={issueToken}
-									bg="#7d769b"
-									color="#f7efe8"
-									_hover={{ opacity: 0.77 }}
-									className="mt-10"
-								>
-									Issue {props.name} Token
-								</Button>
+								<div className="flex mt-10">
+									<Button
+										bg="#7d769b"
+										color="#f7efe8"
+										_hover={{ opacity: 0.77 }}
+										className=""
+									>
+										<AddIcon />
+										<label htmlFor="image" className="mx-3">
+											Upload Image
+										</label>
+									</Button>
+									<input
+										className="hidden"
+										type="file"
+										id="image"
+										onChange={preview}
+									/>
+									<Image
+										src={preImage}
+										boxSize="50px"
+										className="mx-10 rounded-lg"
+									/>
+								</div>
+							</Center>
+							<Center>
+								<IssueRepButton
+									formName={props.name}
+									name={name}
+									symbol={symbol}
+									root={root}
+									mintLimit={mintLimit}
+									selectedFile={selectedFile}
+									leaves={leaves}
+									addIncrement={addIncrement}
+									reduceIncrement={reduceIncrement}
+								/>
 							</Center>
 						</Box>
 					</Center>
 				</FormControl>
-				<h4>{JSON.stringify(data)}</h4>
+				{/* <h4>{JSON.stringify(data)}</h4> */}
 			</div>
 		</div>
 	)

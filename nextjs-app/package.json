@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.10",
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -23,7 +24,8 @@
     "react-dom": "18.2.0",
     "siwe": "^1.1.6",
     "urql": "^3.0.3",
-    "wagmi": "^0.6.4"
+    "wagmi": "^0.6.4",
+    "web3.storage": "^4.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

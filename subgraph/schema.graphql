@@ -22,6 +22,7 @@ type Collection @entity {
 	issuer: Bytes!
 	name: String!
 	uri: String!
+	root: String!
 	createdAt: BigInt!
 	tokens: [Token!]! @derivedFrom(field: "collection")
 }
