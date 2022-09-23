@@ -1,15 +1,25 @@
 import "../styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
+import {
+	getDefaultWallets,
+	RainbowKitProvider,
+	lightTheme,
+	Theme,
+	darkTheme,
+} from "@rainbow-me/rainbowkit"
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import { ChakraProvider } from "@chakra-ui/react"
+import merge from "lodash.merge"
+import Head from 'next/head'
+
 
 const { chains, provider } = configureChains(
 	[
 		chain.localhost,
-		// chain.goerli, chain.sepolia, chain.polygonMumbai, chain.optimismGoerli
+		chain.goerli, 
+		// chain.sepolia, chain.polygonMumbai, chain.optimismGoerli
 	],
 	[alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
 )
@@ -25,10 +35,17 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<div className="m-10">
+		<div className="bg-[#f7efe8] font-['ALEGREYA SANS']">
+			<Head>
+				<title>POST</title>
+				<link rel="icon" type="image/x-icon" href="Logo.png"/>
+			</Head>
 			<WagmiConfig client={wagmiClient}>
 				<ChakraProvider>
-					<RainbowKitProvider chains={chains}>
+					<RainbowKitProvider
+						chains={chains}
+						theme={lightTheme({accentColor:"#7d769b",accentColorForeground: '#f7efe8', overlayBlur:"large"})}
+					>
 						<Component {...pageProps} />
 					</RainbowKitProvider>
 				</ChakraProvider>

@@ -1,20 +1,20 @@
 import {
 	Box,
-	Button,
 	Center,
 	FormControl,
 	FormLabel,
 	Input,
 } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi"
+import { useState } from "react"
+import { useAccount} from "wagmi"
 import Header from "../components/Header"
 import allowList from "../deployedAddress/allowList.json"
 import { MerkleTree } from "merkletreejs"
 import keccak256 from "keccak256"
-import addressJson from "../deployedAddress/address.json"
+import MintButton from "../components/MintButton"
+import Footer from "../components/Footer"
 
-export default function mintUi() {
+export default function claim() {
 	const allowed = allowList.allowed
 	const leaves = allowed.map((x) => keccak256(x))
 	const tree = new MerkleTree(leaves, keccak256, { sortPairs: true })
@@ -28,27 +28,10 @@ export default function mintUi() {
 
 	const changeAddress = (event) => setContractAddress(event.target.value)
 
-	const { config } = usePrepareContractWrite({
-		addressOrName: address,
-		contractInterface: addressJson.soulbound.abi,
-		functionName: "mint",
-		args: [proof],
-		// overrides: { value: parseEther("1") },
-	})
-
-	const { data, isLoading, isSuccess, write } = useContractWrite(config)
-
-	function mintSbt() {
-		console.log("Starting mint.....")
-		write()
-		console.log("Minted SBT!!!!!!!!")
-	}
-
 	return (
 		<div>
 			<Header />
-			<h1 className="">Mint UI</h1>
-			{isConnected ? (
+			<Center><h1 className="text-2xl">Mint UI</h1></Center>
 				<div>
 					<FormControl>
 						<Center>
@@ -56,25 +39,26 @@ export default function mintUi() {
 								<div className="my-10">
 									<FormLabel>Address of SBT</FormLabel>
 									<Input
-										variant="flushed"
-										placeholder="Enter Name"
-										size="lg"
-										value={contractAddress}
-										onChange={changeAddress}
-									/>
+									variant="filled"
+									placeholder="Contract Address"
+									size="lg"
+									value={contractAddress}
+									onChange={changeAddress}
+									bgColor="rgba(208, 130, 144,0.77)"
+									_placeholder={{ color: "#f7efe8" }}
+									_hover={{ bg: "#f7efe8" }}
+									focusBorderColor="#d08290"
+									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
+								/>
 								</div>
 								<Center>
-									<Button onClick={mintSbt}>Claim SBT!</Button>
+									<MintButton contractAddress={contractAddress} proof={proof}/>
 								</Center>
 							</Box>
 						</Center>
 					</FormControl>
 				</div>
-			) : (
-				<div>
-					<h1>Click "Connect Wallet"</h1>
-				</div>
-			)}
+			<Footer/>
 		</div>
 	)
 }
