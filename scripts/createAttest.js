@@ -21,7 +21,7 @@ async function main() {
 		"Attest Test1",
 		"AT1",
         "1",
-		"ipfs://",
+		"ipfs://bafybeicz75tp3cux4bjvu4kxk46emxypyanzqcmefuji34hca7a24avbzq/GroceryBag.jpg",
 		root,
 		3,
 		0,

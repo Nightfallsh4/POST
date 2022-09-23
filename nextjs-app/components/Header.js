@@ -13,11 +13,11 @@ export default function Header() {
 	const { isConnected } = useAccount()
 	return (
 		<div className="flex justify-between bg-[#f7efe8] py-5 px-10 items-center drop-shadow-xl">
-			<Link src="/">
+			<Link href="/">
 				<Image src="Logo.png" boxSize="70px" borderRadius="full"></Image>
 			</Link>
 			<div className="flex justify-between items-center">
-				<Link src="/" className="mr-28">
+				<Link href="/" className="mr-28">
 					<h2 className="hover:text-[#e88775]">Home</h2>
 				</Link>
 				<div className="mr-28">
@@ -27,15 +27,15 @@ export default function Header() {
 						</MenuButton>
 						<MenuList>
 							<MenuItem>
-								<Link src="/issue">Soulbound</Link>
+								<Link href="/issue">Soulbound</Link>
 							</MenuItem>
 
 							<MenuItem>
-								<Link src="/issue">Reputation</Link>
+								<Link href="/issueRep">Reputation</Link>
 							</MenuItem>
 
 							<MenuItem>
-								<Link src="/issue">Attestation</Link>
+								<Link href="/issueAttest">Attestation</Link>
 							</MenuItem>
 						</MenuList>
 					</Menu>
