@@ -1,10 +1,28 @@
+type _Schema_
+	@fulltext(
+		name: "collectionSearch"
+		language: en
+		algorithm: rank
+		include: [
+			{
+				entity: "Collection"
+				fields: [
+					{ name: "id" }
+					{ name: "type" }
+					{ name: "name" }
+				]
+			}
+		]
+	)
+
 type Collection @entity {
 	id: ID!
 	address: Bytes!
 	type: String!
-  	issuer: Bytes!
+	issuer: Bytes!
 	name: String!
 	uri: String!
+	createdAt: BigInt!
 	tokens: [Token!]! @derivedFrom(field: "collection")
 }
 
@@ -17,6 +35,6 @@ type Token @entity {
 }
 
 type User @entity {
-  id: ID!
-  tokens: [Token!]! @derivedFrom(field: "owner")
+	id: ID!
+	tokens: [Token!]! @derivedFrom(field: "owner")
 }

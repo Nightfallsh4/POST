@@ -18,10 +18,10 @@ async function main() {
 
 
 	const tx = await postFactory.createSoulboundAttestationToken(
-		"Test2",
-		"T2",
+		"Attest Test1",
+		"AT1",
         "1",
-		"nightfallsh4.medium.com",
+		"ipfs://",
 		root,
 		3,
 		0,

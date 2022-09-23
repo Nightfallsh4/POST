@@ -6,10 +6,12 @@ export default function IssueSbt() {
 	return (
 		<div className="">
 			<Header />
-			<div className="ml-20 bg-[#f7efe8] left-7 w-1/2">
-				<SbtForm size={"100%"} name={"Soulbound"} abb={"SBT"} />
+			<div className="bg-[url('/post_common.png')] pt-10">
+				<div className="ml-20 left-7 w-1/2 ">
+					<SbtForm size={"100%"} name={"Soulbound"} abb={"SBT"} />
+				</div>
 			</div>
-			<Footer/>
+			<Footer />
 		</div>
 	)
 }

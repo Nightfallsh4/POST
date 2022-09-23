@@ -7,16 +7,18 @@ import {
 	MenuList,
 } from "@chakra-ui/react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useAccount } from "wagmi"
 
 export default function Header() {
+	const { isConnected } = useAccount()
 	return (
-		<div className="flex justify-between bg-[#f7efe8] py-10 px-10 mb-10 items-center">
+		<div className="flex justify-between bg-[#f7efe8] py-5 px-10 items-center drop-shadow-xl">
 			<Link src="/">
 				<Image src="Logo.png" boxSize="70px" borderRadius="full"></Image>
 			</Link>
 			<div className="flex justify-between items-center">
 				<Link src="/" className="mr-28">
-					<h2>Home</h2>
+					<h2 className="hover:text-[#e88775]">Home</h2>
 				</Link>
 				<div className="mr-28">
 					<Menu>
@@ -41,6 +43,7 @@ export default function Header() {
 				<Link src="/sbt" className="mr-28">
 					<h2>SBTs</h2>
 				</Link>
+				{isConnected ? <Link src="/mySbts" className="mr-28">My SBTs</Link> : null}
 				<ConnectButton />
 			</div>
 		</div>

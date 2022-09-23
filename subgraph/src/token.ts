@@ -16,6 +16,7 @@ export function handleDropCreated(event: DropCreatedEvent): void {
 	let contract = SoulboundContract.bind(event.params.dropAddress)
 	entity.name = contract.name()
 	entity.uri = contract.uri()
+	entity.createdAt = event.block.timestamp
 	entity.save()
 	SoulboundDataSource.create(event.params.dropAddress)
 }

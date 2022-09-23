@@ -3,8 +3,8 @@ import { Image, Link } from "@chakra-ui/react"
 export default function Footer() {
 	return (
 		<div className="bg-[#d08290] bottom-0 min-h-10">
-			<div className="flex p-9">
-				<Image src="Logo.png" boxSize="130px" borderRadius="full"></Image>
+			<div className="flex p-4">
+				<Image src="Logo.png" boxSize="100px" borderRadius="full"></Image>
 				<div className="ml-20 text-[#f7efe8]">
 					<div className="mt-5">
 						<Link src="/">Home</Link>

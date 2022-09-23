@@ -59,7 +59,7 @@ export default function SbtForm(props) {
 	return (
 		<div>
 			<Center>
-				<h1 className="text-3xl font-bold">Issue {props.name} Token</h1>
+				<h1 className="text-3xl">Issue {props.name} Token</h1>
 			</Center>
 
 			<div className="py-10">
@@ -75,7 +75,7 @@ export default function SbtForm(props) {
 									value={name}
 									onChange={changeName}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8" }}
+									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
 									_hover={{ bg: "#f7efe8" }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
@@ -90,7 +90,7 @@ export default function SbtForm(props) {
 									value={symbol}
 									onChange={changeSymbol}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8" }}
+									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
 									_hover={{ bg: "#f7efe8" }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
@@ -105,7 +105,7 @@ export default function SbtForm(props) {
 									value={uri}
 									onChange={changeUri}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8" }}
+									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
@@ -119,7 +119,7 @@ export default function SbtForm(props) {
 									value={mintLimit}
 									onChange={changeMintLimit}
 									bgColor="rgba(208, 130, 144,0.77)"
-									_placeholder={{ color: "#f7efe8" }}
+									_placeholder={{ color: "#f7efe8", opacity:0.5 }}
 									focusBorderColor="#d08290"
 									className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 								/>
@@ -134,7 +134,7 @@ export default function SbtForm(props) {
 										value={allowList}
 										onChange={changeAllowList}
 										bgColor="rgba(208, 130, 144,0.77)"
-										_placeholder={{ color: "#f7efe8" }}
+										_placeholder={{ color: "#f7efe8", opacity:0.5}}
 										focusBorderColor="#d08290"
 										className="drop-shadow-xl font-['ALEGREYA'] font-bold"
 									/>

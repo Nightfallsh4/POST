@@ -25,6 +25,7 @@ dataSources:
         - event: DropCreated(string,address)
           handler: handleDropCreated
       file: ./src/token.ts
+features: [fullTextSearch]
 templates:
   - kind: ethereum
     name: Soulbound

@@ -25,6 +25,8 @@ dataSources:
         - event: DropCreated(string,address)
           handler: handleDropCreated
       file: Token/Token.wasm
+features:
+  - fullTextSearch
 templates:
   - kind: ethereum
     name: Soulbound
