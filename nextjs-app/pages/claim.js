@@ -22,6 +22,7 @@ export default function claim() {
 	const { address, isConnected } = useAccount()
 	if (isConnected) {
 		proof = tree.getHexProof(keccak256(address))
+		console.log(proof)
 	}
 
 	const [contractAddress, setContractAddress] = useState("")

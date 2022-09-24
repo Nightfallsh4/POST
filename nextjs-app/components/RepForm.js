@@ -18,7 +18,7 @@ import IssueRepButton from "./IssueRepButton"
 export default function RepForm(props) {
 	const [name, setName] = useState("")
 	const [symbol, setSymbol] = useState("")
-	const [mintLimit, setMintLimit] = useState()
+	const [mintLimit, setMintLimit] = useState("")
 	const [allowList, setAllowList] = useState("")
 	const [root, setRoot] = useState("")
 	const [selectedFile, setSelectedFile] = useState()

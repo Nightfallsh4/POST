@@ -36,6 +36,7 @@ export default function SbtForm(props) {
 
 	function makeRoot() {
 		const _leaves = allowList.map((x) => keccak256(x))
+		console.log(_leaves)
 		const tree = new MerkleTree(_leaves, keccak256, { sortPairs: true })
 		const _root = tree.getHexRoot()
 		setRoot(_root)

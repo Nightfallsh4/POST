@@ -41,6 +41,13 @@ export default function IssueRepButton(props) {
 	async function issueToken() {
 		console.log(typeof props.selectedFile)
 		await uploadToIpfs()
+		console.log(props.name)
+		console.log(props.symbol)
+		console.log(props.uri)
+		console.log(props.root)
+		console.log(props.mintLimit)
+		console.log(props.addIncrement)
+		console.log(props.reduceIncrement)
 		await write?.()
 	}
 	return (
