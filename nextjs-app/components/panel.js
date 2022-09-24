@@ -34,9 +34,11 @@ export default function Panel(props) {
 	async function getAllowed() {
 		const token = process.env.NEXT_PUBLIC_WEB3_STORAGE
 		const web3Client = new Web3Storage({ token: token })
-		const res = await web3Client.get(allowedUrl)
+		const res = await web3Client.get(allowedUrl).catch((e) => {
+			console.log(e)
+		})
 		if (!res.ok) {
-			console.log("cant find the specified res");
+			console.log("cant find the specified res")
 		} else {
 			console.log(res)
 			const files = await res.files()
@@ -77,7 +79,11 @@ export default function Panel(props) {
 				<h2 className="mb-14">{props.name}</h2>
 			</Center>
 			<Center>
-				<Image src={image} boxSize="150px" borderRadius="full" />
+				{image ? (
+					<Image src={image} boxSize="150px" borderRadius="full" />
+				) : (
+					<Image src="/Logo.png" boxSize="150px" borderRadius="full" />
+				)}
 			</Center>
 			<Center>
 				<Button
@@ -112,12 +118,11 @@ export default function Panel(props) {
 							)}
 						</div>
 						<Center>
-							<Image
-								src={image}
-								boxSize="150px"
-								borderRadius="full"
-								className="my-10"
-							/>
+						{image ? (
+								<Image src={image} boxSize="150px" borderRadius="full"  className="my-10"/>
+							) : (
+								<Image src="/Logo.png" boxSize="150px" borderRadius="full" className="my-10"/>
+							)}
 						</Center>
 						<h3 className="my-5">Issuer- {props.issuer}</h3>
 						<Center>

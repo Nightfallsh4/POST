@@ -17,7 +17,7 @@ import IssueButton from "./issueButton"
 export default function SbtForm(props) {
 	const [name, setName] = useState("")
 	const [symbol, setSymbol] = useState("")
-	const [mintLimit, setMintLimit] = useState()
+	const [mintLimit, setMintLimit] = useState("")
 	const [allowList, setAllowList] = useState("")
 	const [root, setRoot] = useState("")
 	const [selectedFile, setSelectedFile] = useState()
@@ -130,8 +130,8 @@ export default function SbtForm(props) {
 									</Button>
 								</div>
 							</div>
-								<Center>
-							<div className="flex mt-10">
+							<Center>
+								<div className="flex mt-10">
 									<Button
 										bg="#7d769b"
 										color="#f7efe8"
@@ -149,18 +149,23 @@ export default function SbtForm(props) {
 										id="image"
 										onChange={preview}
 									/>
-								<Image src={preImage} boxSize="50px" className="mx-10 rounded-lg"/>
-							</div>
-								</Center>
+									<Image
+										src={preImage}
+										boxSize="50px"
+										className="mx-10 rounded-lg"
+									/>
+								</div>
+							</Center>
 							<Center>
 								<IssueButton
-								formName={props.name}
+									formName={props.name}
 									name={name}
 									symbol={symbol}
 									root={root}
 									mintLimit={mintLimit}
 									selectedFile={selectedFile}
 									leaves={leaves}
+									toast={props.toast}
 								/>
 							</Center>
 						</Box>

@@ -22,8 +22,8 @@ export default function Header() {
 				</Link>
 				<div className="mr-28">
 					<Menu>
-						<MenuButton>
-							<h2>Issue</h2>
+						<MenuButton className="hover:text-[#e88775]">
+							<h2 >Issue</h2>
 						</MenuButton>
 						<MenuList>
 							<MenuItem>
@@ -40,10 +40,10 @@ export default function Header() {
 						</MenuList>
 					</Menu>
 				</div>
-				<Link src="/sbt" className="mr-28">
-					<h2>SBTs</h2>
+				<Link href="/sbt" className="mr-28">
+					<h2 className="hover:text-[#e88775]">SBTs</h2>
 				</Link>
-				{isConnected ? <Link src="/mySbts" className="mr-28">My SBTs</Link> : null}
+				{isConnected ? <Link href="/mySbts" className="mr-28"><h2 className="hover:text-[#e88775]">My SBTs</h2></Link> : null}
 				<ConnectButton />
 			</div>
 		</div>

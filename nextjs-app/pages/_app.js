@@ -1,18 +1,19 @@
+import dynamic from "next/dynamic"
 import "../styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
 import {
 	getDefaultWallets,
-	RainbowKitProvider,
 	lightTheme,
-	Theme,
-	darkTheme,
+	RainbowKitProvider
 } from "@rainbow-me/rainbowkit"
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi"
+// const RainbowKitProvider =dynamic(async () => {return (await import("@rainbow-me/rainbowkit")).default})
+// const {RainbowKitProvider} = RainbowKit
+import { chain, configureChains, createClient, useAccount, WagmiConfig } from "wagmi"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import { ChakraProvider } from "@chakra-ui/react"
-import merge from "lodash.merge"
 import Head from 'next/head'
+import { useEffect } from "react"
 
 
 const { chains, provider } = configureChains(

@@ -6,9 +6,11 @@ import Panel from "../components/panel"
 import { useToast } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 
+
 export default function sbt() {
 	const toast = useToast()
 	const [data, setData] = useState()
+   
 	const apiUrl = "https://api.studio.thegraph.com/query/34828/post/0.0.15"
 	const querySchema = `
         query{
@@ -65,14 +67,6 @@ export default function sbt() {
 								)
 						  })
 						: null}
-					{/* <Panel
-						name={"Something1"}
-						uri="ipfs://bafybeicrecjxbubmox5ge4vydkxgdogiwfeicbrw65t66xapfngumlkxzq"
-						type="Attest"
-						issuer="0x5184116811616184qadsad4841"
-                        id="0x1186f04df2714f84997ef4cbbc9408f7d836b022"
-                        toast={toast}
-					/> */}
 				</div>
 			</div>
 			<Footer />

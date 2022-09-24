@@ -199,6 +199,7 @@ export default function RepForm(props) {
 									leaves={leaves}
 									addIncrement={addIncrement}
 									reduceIncrement={reduceIncrement}
+									toast={props.toast}
 								/>
 							</Center>
 						</Box>
