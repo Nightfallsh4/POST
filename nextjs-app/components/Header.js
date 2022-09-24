@@ -14,7 +14,7 @@ export default function Header() {
 	return (
 		<div className="flex justify-between bg-[#f7efe8] py-5 px-10 items-center drop-shadow-xl">
 			<Link href="/">
-				<Image src="Logo.png" boxSize="70px" borderRadius="full"></Image>
+				<Image src="/Logo.png" boxSize="70px" borderRadius="full"></Image>
 			</Link>
 			<div className="flex justify-between items-center">
 				<Link href="/" className="mr-28">
