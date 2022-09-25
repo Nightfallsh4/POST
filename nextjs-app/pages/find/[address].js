@@ -54,7 +54,11 @@ export default function findAddress() {
 			<div className="h-full min-h-full">
 				<div className="mx-44 my-20">
 					<Center>
-						<h1 className="text-xl font-bold">{address}</h1>
+						<div className="p-5 bg-[#d08290] rounded-xl">
+							<h1 className="text-xl text-[white] font-bold">
+								{address}
+							</h1>
+						</div>
 					</Center>
 
 					<div className="grid grid-cols-4 gap-4 ">

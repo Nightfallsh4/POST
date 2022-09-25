@@ -74,9 +74,10 @@ export default function mySbts() {
 								: null}
 						</div>
 					) : (
-						<div>
+						<div className="">
 							<Center>
-								<h1 className="text-5xl my-64">Connect Your Wallet</h1>
+								<div className="p-16  my-64 bg-[#7d769b] rounded-[50px]">
+								<h1 className="text-5xl text-[white]">Click Connect Wallet</h1></div>
 							</Center>
 						</div>
 					)}

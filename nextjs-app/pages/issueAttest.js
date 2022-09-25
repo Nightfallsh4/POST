@@ -11,7 +11,7 @@ export default function IssueSbt() {
 			<Header />
 			<div className="bg-[url('/post_common.png')] pt-10">
 				<div className="ml-20 left-7 w-1/2 ">
-					<AttestForm size={"100%"} name={"Attest"} abb={"Attest SBT"} toast={toast}/>
+					<AttestForm size={"100%"} name={"Attestation"} abb={"Attest SBT"} toast={toast}/>
 				</div>
 			</div>
 			<Footer />

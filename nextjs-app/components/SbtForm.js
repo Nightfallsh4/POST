@@ -51,7 +51,7 @@ export default function SbtForm(props) {
 	}
 
 	return (
-		<div>
+		<div className="mt-10">
 			<Center>
 				<h1 className="text-3xl">Issue {props.name} Token</h1>
 			</Center>

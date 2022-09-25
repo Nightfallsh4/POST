@@ -54,14 +54,14 @@ export default function CirclePanel(props) {
 					</Center>
 				</Link>
 			</div>
-			<Modal isOpen={isOpen} onClose={onClose}>
+			<Modal isOpen={isOpen} onClose={onClose} size="2xl">
 				<ModalOverlay />
-				<ModalContent>
+				<ModalContent className="">
 					<ModalHeader>{props.name}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
 						<div className="flex w-3/5">
-							<h3 className="mx-2 rounded-lg bg-[#e88775] opacity-75 p-2">
+							<h3 className="mx-2 rounded-lg bg-[#e88775] opacity-75 p-2 font-bold">
 								{props.type}
 							</h3>
 						</div>
@@ -72,10 +72,38 @@ export default function CirclePanel(props) {
 								<Image src="/Logo.png" boxSize="150px" borderRadius="full" />
 							)}
 						</Center>
-						<h3>Token Id:- {props.tokenId}</h3>
-						<h3>Address:- {props.address}</h3>
-						<h3>Issuer:- {props.issuer}</h3>
-						<h3>Uri:- {props.uri}</h3>
+						<div className="my-3">
+							<Center>
+								<h3 className="text-[#e88775] inline-block">TOKEN ID</h3>
+							</Center>
+							<Center>
+								<p>{props.tokenId}</p>
+							</Center>
+						</div>
+						<div className="mb-3">
+							<Center>
+								<h3 className="text-[#e88775] inline-block">ADDRESS</h3>
+							</Center>
+							<Center>
+								<p> {props.address}</p>
+							</Center>
+						</div>
+						<div className="mb-3">
+							<Center>
+								<h3 className="text-[#e88775] inline-block">ISSUER</h3>
+							</Center>
+							<Center>
+								<p> {props.issuer}</p>
+							</Center>
+						</div>
+						<div className="mb-10">
+							<Center>
+								<h3 className="text-[#e88775] inline-block">URI</h3>
+							</Center>
+							<Center>
+								<p>{props.uri}</p>
+							</Center>
+						</div>
 					</ModalBody>
 				</ModalContent>
 			</Modal>

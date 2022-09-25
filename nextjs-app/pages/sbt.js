@@ -47,11 +47,11 @@ export default function sbt() {
 	return (
 		<div className="bg-[url('/bg.png')] h-full min-h-full">
 			<Header />
-			<div className=" bg-repeat-y">
-				<h1 className="text-3xl my-14">
+			<div className="bg-repeat-y">
+				<h1 className="text-4xl mt-44 text-[#d08290] font-bold">
 					<Center>Soulbound Tokens</Center>
 				</h1>
-				<div className="grid grid-cols-4 gap-4 mx-10">
+				<div className="grid grid-cols-4 gap-3 mx-5">
 					{data
 						? data.map((sbt) => {
 								return (

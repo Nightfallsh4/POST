@@ -7,32 +7,35 @@ export default function Footer() {
 				<Image src="/Logo.png" boxSize="100px" borderRadius="full"></Image>
 				<div className="ml-20 text-[#f7efe8]">
 					<div className="mt-5">
-						<Link src="/">Home</Link>
+						<Link href="/" className="hover:text-[#3d485b]">Home</Link>
 					</div>
                     <div className="mt-5">
-						<Link src="/issue">Issue</Link>
+						<Link href="/issue" className="hover:text-[#3d485b]">Issue</Link>
 					</div>
                     <div className="mt-5">
-						<Link src="/">My SBT</Link>
+						<Link href="/mySbts" className="hover:text-[#3d485b]">My SBT</Link>
 					</div>
 				</div>
                 <div className="ml-40 text-[#f7efe8]">
 					<div className="mt-5">
-						<Link src="/">Soulbound Tokens</Link>
+						<Link href="/issue" className="hover:text-[#3d485b]">Soulbound Tokens</Link>
 					</div>
                     <div className="mt-5">
-						<Link src="/issue">Reputation SBTs</Link>
+						<Link href="/issueRep" className="hover:text-[#3d485b]">Reputation SBTs</Link>
 					</div>
                     <div className="mt-5">
-						<Link src="/">Attestation SBTs</Link>
+						<Link href="/issueAttest" className="hover:text-[#3d485b]">Attestation SBTs</Link>
 					</div>
 				</div>
                 <div className="ml-40 text-[#f7efe8]">
 					<div className="mt-5">
-						<Link src="/">About Us</Link>
+						<Link href="/" className="hover:text-[#3d485b]">About Us</Link>
+					</div>
+					<div className="mt-5">
+						<Link href="/find" className="hover:text-[#3d485b]">View</Link>
 					</div>
                     <div className="mt-5">
-						<Link src="/">Github</Link>
+						<Link href="/" className="hover:text-[#3d485b]">Github</Link>
 					</div>
 				</div>
                 

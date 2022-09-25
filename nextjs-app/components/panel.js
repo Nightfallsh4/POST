@@ -74,7 +74,7 @@ export default function Panel(props) {
 		getAllowed()
 	}, [isConnected])
 	return (
-		<div className="w-64 h-96 mx-40 mt-44 mb-14 bg-[white] drop-shadow-xl rounded-lg py-7">
+		<div className="w-64 h-96 mx-28 mt-44 mb-14 bg-[white] drop-shadow-xl rounded-lg py-7">
 			<Center>
 				<h2 className="mb-14">{props.name}</h2>
 			</Center>
@@ -88,8 +88,8 @@ export default function Panel(props) {
 			<Center>
 				<Button
 					onClick={onOpen}
-					bg="#f7efe8"
-					color="#7d769b"
+					bg="#d08290"
+					color="#f7efe8"
 					_hover={{ opacity: 0.77 }}
 					className="my-10"
 					px="1.5rem"
@@ -103,16 +103,16 @@ export default function Panel(props) {
 					<ModalHeader>{props.name}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<div className="flex w-3/5">
+						<div className="flex w-4/5">
 							<h3 className="mx-2 rounded-lg bg-[#e88775] opacity-75 p-2">
 								{props.type}
 							</h3>
 							{eligiblity ? (
-								<h3 className="mx-2 rounded-lg bg-[green] opacity-75 p-2">
+								<h3 className="mx-2 rounded-lg bg-[green] text-[white] opacity-75 p-2">
 									Eligible
 								</h3>
 							) : (
-								<h3 className="mx-2 rounded-lg bg-[red] opacity-75 p-2">
+								<h3 className="mx-2 rounded-lg bg-[#b92025] text-[white] opacity-75 p-2">
 									Not Eligible
 								</h3>
 							)}
